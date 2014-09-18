@@ -89,6 +89,11 @@ public class InfinitePagerAdapter extends PagerAdapter {
         return adapter.getPageTitle(virtualPosition);
     }
 
+    @Override
+    public int getItemPosition(Object object) {
+        return POSITION_NONE;
+    }
+
     /*
      * End delegation
      */

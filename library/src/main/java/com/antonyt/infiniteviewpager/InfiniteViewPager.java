@@ -51,6 +51,18 @@ public class InfiniteViewPager extends ViewPager {
         }
     }
 
+    public int getRealCurrentItem() {
+        return super.getCurrentItem();
+    }
+
+    public void setRealCurrentItem(int item) {
+        setRealCurrentItem(item, false);
+    }
+
+    public void setRealCurrentItem(int item, boolean smoothScroll) {
+        super.setCurrentItem(item, smoothScroll);
+    }
+
     private int getOffsetAmount() {
         if (getAdapter() instanceof InfinitePagerAdapter) {
             InfinitePagerAdapter infAdapter = (InfinitePagerAdapter) getAdapter();
