@@ -15,16 +15,16 @@ repositories {
 apply plugin: 'com.android.library'
 
 dependencies {
-    compile 'com.android.support:support-v4:20.+'
+    compile 'com.android.support:support-v4:21.+'
 }
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 21
+    buildToolsVersion "21.0.0"
 
     defaultConfig {
-        targetSdkVersion 19
-        minSdkVersion 8
+        targetSdkVersion 21
+        minSdkVersion 10
         versionCode 1
         versionName "1.0"
     }
