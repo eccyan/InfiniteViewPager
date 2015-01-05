@@ -42,7 +42,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
         debug("instantiateItem: virtual position: " + virtualPosition);
 
         // only expose virtual position to the inner adapter
-        return adapter.instantiateItem(container, position);
+        return adapter.instantiateItem(container, virtualPosition);
     }
 
     @Override
@@ -52,7 +52,7 @@ public class InfinitePagerAdapter extends PagerAdapter {
         debug("destroyItem: virtual position: " + virtualPosition);
 
         // only expose virtual position to the inner adapter
-        adapter.destroyItem(container, position, object);
+        adapter.destroyItem(container, virtualPosition, object);
     }
 
     /*
@@ -91,8 +91,33 @@ public class InfinitePagerAdapter extends PagerAdapter {
     }
 
     @Override
+    public float getPageWidth(int position) {
+        return adapter.getPageWidth(position);
+    }
+
+    @Override
+    public void setPrimaryItem(ViewGroup container, int position, Object object) {
+        adapter.setPrimaryItem(container, position, object);
+    }
+
+    @Override
+    public void unregisterDataSetObserver(DataSetObserver observer) {
+        adapter.unregisterDataSetObserver(observer);
+    }
+
+    @Override
+    public void registerDataSetObserver(DataSetObserver observer) {
+        adapter.registerDataSetObserver(observer);
+    }
+
+    @Override
+    public void notifyDataSetChanged() {
+        adapter.notifyDataSetChanged();
+    }
+
+    @Override
     public int getItemPosition(Object object) {
-        return POSITION_NONE;
+        return adapter.getItemPosition(object);
     }
 
     /*

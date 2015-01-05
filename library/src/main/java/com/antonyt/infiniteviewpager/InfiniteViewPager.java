@@ -5,10 +5,6 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
-import android.view.animation.DecelerateInterpolator;
-import android.widget.Scroller;
-
-import java.lang.reflect.Field;
 
 /**
  * A {@link ViewPager} that allows pseudo-infinite paging with a wrap-around effect. Should be used with an {@link
@@ -18,12 +14,10 @@ public class InfiniteViewPager extends ViewPager {
 
     public InfiniteViewPager(Context context) {
         super(context);
-        setMyScroller();
     }
 
     public InfiniteViewPager(Context context, AttributeSet attrs) {
         super(context, attrs);
-        setMyScroller();
     }
 
     @Override
@@ -57,18 +51,6 @@ public class InfiniteViewPager extends ViewPager {
         }
     }
 
-    public int getRealCurrentItem() {
-        return super.getCurrentItem();
-    }
-
-    public void setRealCurrentItem(int item) {
-        setRealCurrentItem(item, true);
-    }
-
-    public void setRealCurrentItem(int item, boolean smoothScroll) {
-        super.setCurrentItem(item, smoothScroll);
-    }
-
     private int getOffsetAmount() {
         if (getAdapter() instanceof InfinitePagerAdapter) {
             InfinitePagerAdapter infAdapter = (InfinitePagerAdapter) getAdapter();
@@ -81,33 +63,4 @@ public class InfiniteViewPager extends ViewPager {
             return 0;
         }
     }
-
-    private void setMyScroller()
-    {
-        try
-        {
-            Class<?> viewpager = ViewPager.class;
-            Field scroller = viewpager.getDeclaredField("mScroller");
-            scroller.setAccessible(true);
-            scroller.set(this, new MyScroller(getContext()));
-        } catch (Exception e)
-        {
-            e.printStackTrace();
-        }
-    }
-
-    public class MyScroller extends Scroller
-    {
-        public MyScroller(Context context)
-        {
-            super(context, new DecelerateInterpolator());
-        }
-
-        @Override
-        public void startScroll(int startX, int startY, int dx, int dy, int duration)
-        {
-            super.startScroll(startX, startY, dx, dy, 300 /*1 secs*/);
-        }
-    }
-
 }
